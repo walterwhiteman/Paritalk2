@@ -1,106 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Paritalk</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paritalk - Login</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      background: linear-gradient(to right, #dff1ff, #f5f8ff);
       margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #e6f0ff, #ffffff);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
-    .login-container {
-      background: #ffffffcc;
-      backdrop-filter: blur(10px);
-      padding: 2.5rem;
+    .login-box {
+      background: white;
+      padding: 2rem;
       border-radius: 1.5rem;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
-      width: 90%;
-      max-width: 420px;
-    }
-
-    .login-container h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.25rem;
-      color: #007bff;
-    }
-
-    .tagline {
-      font-size: 1rem;
-      color: #444;
-      margin-bottom: 1.75rem;
-    }
-
-    .login-container input {
+      max-width: 400px;
       width: 100%;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.75rem;
-      font-size: 1rem;
     }
-
-    .login-container button {
+    .login-box h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    .login-box p {
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 2rem;
+    }
+    input {
+      display: block;
       width: 100%;
       padding: 0.75rem;
-      background-color: #007bff;
-      color: white;
+      margin-bottom: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
       border: none;
       border-radius: 0.75rem;
-      font-size: 1.1rem;
+      background-color: #007bff;
+      color: white;
+      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
-
-    .login-container button:hover {
-      background-color: #005dcf;
-    }
-
-    .footer-note {
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: #888;
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Paritalk</h1>
-    <p class="tagline">Just you and me, always connected.</p>
-
-    <input type="text" id="username" placeholder="Enter your name (Yash / Pari)" />
+  <div class="login-box">
+    <h1>Welcome to Paritalk</h1>
+    <p>Premium chat and video calling space only for Yash and Pari</p>
+    <input type="text" id="username" placeholder="Enter Username (Yash / Pari)" />
     <input type="text" id="roomCode" placeholder="Enter Room Code" />
-    <button id="loginBtn">Enter Chat</button>
+    <button id="loginBtn">Login</button>
+  </div>  <script type="module">
+    import { auth } from './firebase.js';
+    const loginBtn = document.getElementById('loginBtn');
 
-    <p class="footer-note">Private space for Yash & Pari only 💙</p>
-  </div>
-
-  <script type="module">
-    document.getElementById('loginBtn').addEventListener('click', () => {
+    loginBtn.addEventListener('click', () => {
       const username = document.getElementById('username').value.trim();
       const roomCode = document.getElementById('roomCode').value.trim();
 
-      const allowedUsers = ['Yash', 'Pari'];
-      const allowedRoomCodes = ['5201314pari', '238023'];
-
-      if (allowedUsers.includes(username) && allowedRoomCodes.includes(roomCode)) {
-        localStorage.setItem('username', username);
-        localStorage.setItem('roomCode', roomCode);
+      if ((username === 'Yash' || username === 'Pari') && (roomCode === '5201314pari' || roomCode === '238023')) {
+        sessionStorage.setItem('username', username);
+        sessionStorage.setItem('roomCode', roomCode);
         window.location.href = 'chatroom.html';
       } else {
-        alert('Access Denied. Please enter correct credentials.');
+        alert('Only Yash and Pari can use Paritalk. Invalid username or room code.');
       }
     });
-  </script>
-</body>
+  </script></body>
 </html>
