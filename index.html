@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paritalk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #e6f0ff, #ffffff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #ffffffcc;
+      backdrop-filter: blur(10px);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 420px;
+    }
+
+    .login-container h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.25rem;
+      color: #007bff;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 1.75rem;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #005dcf;
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Paritalk</h1>
+    <p class="tagline">Just you and me, always connected.</p>
+
+    <input type="text" id="username" placeholder="Enter your name (Yash / Pari)" />
+    <input type="text" id="roomCode" placeholder="Enter Room Code" />
+    <button id="loginBtn">Enter Chat</button>
+
+    <p class="footer-note">Private space for Yash & Pari only 💙</p>
+  </div>
+
+  <script type="module">
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+      const roomCode = document.getElementById('roomCode').value.trim();
+
+      const allowedUsers = ['Yash', 'Pari'];
+      const allowedRoomCodes = ['5201314pari', '238023'];
+
+      if (allowedUsers.includes(username) && allowedRoomCodes.includes(roomCode)) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('roomCode', roomCode);
+        window.location.href = 'chatroom.html';
+      } else {
+        alert('Access Denied. Please enter correct credentials.');
+      }
+    });
+  </script>
+</body>
+</html>
