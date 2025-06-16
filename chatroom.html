@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paritalk - Chatroom</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.268.0/font/lucide.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #f8fbff, #eef3f8);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffffcc;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1.2rem;
+      z-index: 10;
+    }
+
+    .chat-header h2 {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 0;
+    }
+
+    .chat-header .room-info {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .header-icons button {
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      margin-left: 0.75rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      padding: 5rem 1rem 4.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin: 0.5rem 0;
+      max-width: 70%;
+      padding: 0.8rem 1rem;
+      border-radius: 1.25rem;
+      position: relative;
+      word-wrap: break-word;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .message.user {
+      background: #e3f0ff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0.3rem;
+    }
+
+    .message.other {
+      background: #ffffff;
+      align-self: flex-start;
+      border-bottom-left-radius: 0.3rem;
+    }
+
+    .meta {
+      font-size: 0.7rem;
+      color: #888;
+      margin-top: 0.3rem;
+    }
+
+    .system-msg {
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+      margin: 0.7rem auto;
+      font-style: italic;
+    }
+
+    .chat-input-area {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background: white;
+      border-top: 1px solid #ccc;
+      padding: 0.6rem 1rem;
+      z-index: 10;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border-radius: 1.25rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .chat-input-area button {
+      background: #007bff;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .file-icon {
+      font-size: 1.3rem;
+      margin-right: 0.5rem;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .typing-status {
+      position: absolute;
+      bottom: 4rem;
+      left: 1.2rem;
+      font-size: 0.8rem;
+      color: #777;
+      font-style: italic;
+    }
+
+    .fixed-file {
+      background: #f3f3f3;
+      border-radius: 0.75rem;
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.85rem;
+      max-width: 240px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-header">
+    <div>
+      <h2>Paritalk</h2>
+      <div class="room-info" id="roomInfo">Room: <span id="roomName">—</span> • <span id="userCount">0</span> online</div>
+    </div>
+    <div class="header-icons">
+      <button id="startCallBtn" title="Start Video Call"><i class="lucide-video"></i></button>
+      <button id="leaveRoomBtn" title="Leave Room"><i class="lucide-log-out"></i></button>
+    </div>
+  </div>
+
+  <div id="chatBox" class="chat-box"></div>
+  <div id="typingStatus" class="typing-status"></div>
+
+  <div class="chat-input-area">
+    <i class="lucide-paperclip file-icon" id="sendFileBtn" title="Send File"></i>
+    <input type="text" id="msgInput" placeholder="Type your message..." />
+    <button id="sendBtn"><i class="lucide-send"></i></button>
+  </div>
+
+  <script type="module" src="./chatroom.js"></script>
+</body>
+</html>
